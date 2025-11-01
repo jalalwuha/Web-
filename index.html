@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jalal Network</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Poppins:wght@400;600&display=swap');
+
+    * {margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth;}
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: radial-gradient(circle at top, #06090e, #000);
+      color: #fff;
+      overflow-x: hidden;
+      text-align: center;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    #particles {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeSlide 1s ease forwards;
+    }
+    @keyframes fadeSlide {
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    .logo {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      position: relative;
+      overflow: hidden;
+      margin: 80px auto 25px;
+      box-shadow: 0 0 30px #00ffff55;
+      z-index: 2;
+      animation: fadeSlide 1.5s ease forwards;
+    }
+    .logo::before {
+      content:"";
+      position:absolute;
+      inset:-2px;
+      border-radius:50%;
+      border:3px solid transparent;
+      background:conic-gradient(#00ffff,#4f46e5,#00ffff);
+      animation:spin 5s linear infinite;
+      z-index:1;
+    }
+    .logo img {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+    @keyframes spin {100%{transform:rotate(360deg)}}
+
+    @keyframes flicker {
+      0%, 95%, 100% {opacity:1;}
+      96%, 97% {opacity:0;}
+      98%, 99% {opacity:1;}
+    }
+    h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.2em;
+      color: #fff;
+      text-shadow: 0 0 20px #00ffffaa, 0 0 40px #00ffff33;
+      animation: flicker 2.05s infinite;
+      transform: skewX(-10deg);
+      font-style: italic;
+      z-index: 2;
+    }
+
+    p {
+      color: #aaa;
+      margin: 10px 0 20px;
+      z-index: 2;
+    }
+
+    /* Musik Player */
+    .music-player {
+      margin: 10px auto 30px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 10px 18px;
+      border-radius: 14px;
+      backdrop-filter: blur(8px);
+      z-index: 3;
+      width: fit-content;
+      animation: fadeSlide 1.5s ease forwards;
+    }
+
+    .play-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: transform .2s;
+    }
+    .play-btn:hover {transform: scale(1.1);}
+    .play-btn svg {width: 20px; height: 20px; fill: #000;}
+
+    .track-info {text-align: left;}
+    .track-title {font-weight: 600; font-size: 14px; color: #fff; margin-bottom:6px;}
+    .progress-bar {
+      width: 160px; height: 4px;
+      background: rgba(255,255,255,0.15);
+      border-radius: 2px;
+      overflow: hidden;
+      position: relative;
+    }
+    .progress {
+      position: absolute;
+      left: 0; top: 0;
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #00ffff, #4f46e5);
+    }
+
+    /* Tombol link */
+    .link {
+      width: 90%;
+      max-width: 380px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 14px 20px;
+      border-radius: 14px;
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      margin: 12px auto;
+      position: relative;
+      overflow: hidden;
+      transition: transform .3s ease, box-shadow .3s;
+      backdrop-filter: blur(6px);
+      z-index: 2;
+      animation: fadeSlide 1.5s ease forwards;
+    }
+    .link:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 0 12px #00ffff55;
+    }
+    .link::before {
+      content:"";
+      position:absolute;
+      inset:0;
+      border-radius:14px;
+      padding:1.5px;
+      background:linear-gradient(120deg,#00ffff,#4f46e5,#00ffff);
+      background-size:200% 200%;
+      animation:rgbflow 5s linear infinite;
+      -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+      -webkit-mask-composite:xor;
+      mask-composite:exclude;
+      pointer-events:none;
+    }
+    @keyframes rgbflow {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+
+    .icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255,255,255,0.1);
+    }
+    .icon img {width: 18px; height: 18px;}
+
+    footer {
+      margin: 40px 0 30px;
+      font-size: .8em;
+      color: #666;
+      z-index: 2;
+      animation: fadeSlide 2s ease forwards;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="particles"></canvas>
+
+  <div class="logo fade-in">
+    <img src="https://files.catbox.moe/7jwt69.jpg" alt="Foto Jalal">
+  </div>
+
+  <h1 class="fade-in">Jalal wuhahaaaa</h1>
+  <p class="fade-in">Nomor Dan Saluran WhatsApp Jalal</p>
+
+  <!-- Pemutar Musik -->
+  <div class="music-player fade-in">
+    <div class="play-btn" id="playBtn">
+      <svg id="playIcon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+    </div>
+    <div class="track-info">
+      <div class="track-title">Cyber Drift</div>
+      <div class="progress-bar"><div class="progress" id="progress"></div></div>
+    </div>
+    <audio id="bgMusic" src="https://files.catbox.moe/65no16.bin"></audio>
+  </div>
+
+  <!-- Link Buttons -->
+  <a href="https://wa.me/+6283177303625" class="link fade-in">
+    <div class="icon"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"></div>
+    Chat WhatsApp
+  </a>
+
+  <a href="https://whatsapp.com/channel/0029Vb5voQUEawdrC8wYGD20" class="link fade-in">
+    <div class="icon"><img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/WhatsApp_icon.png"></div>
+    Saluran WhatsApp
+  </a>
+
+  <footer>© 2025 Jalal ⚙️</footer>
+
+  <script>
+    const canvas = document.getElementById("particles");
+    const ctx = canvas.getContext("2d");
+    let particles = [];
+
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener("resize", resize);
+    resize();
+
+    function createParticles() {
+      for (let i = 0; i < 80; i++) {
+        particles.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          size: Math.random() * 2 + 1,
+          speedX: (Math.random() - 0.5) * 0.6,
+          speedY: (Math.random() - 0.5) * 0.6,
+        });
+      }
+    }
+
+    function drawParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = "rgba(0,255,255,0.8)";
+      particles.forEach(p => {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fill();
+        p.x += p.speedX;
+        p.y += p.speedY;
+        if (p.x < 0 || p.x > canvas.width) p.speedX *= -1;
+        if (p.y < 0 || p.y > canvas.height) p.speedY *= -1;
+      });
+      requestAnimationFrame(drawParticles);
+    }
+    createParticles();
+    drawParticles();
+
+    const music = document.getElementById('bgMusic');
+    const playBtn = document.getElementById('playBtn');
+    const playIcon = document.getElementById('playIcon');
+    const progress = document.getElementById('progress');
+
+    let playing = false;
+
+    playBtn.onclick = ()=>{
+      if(!playing){
+        music.play();
+        playIcon.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
+        playing = true;
+      } else {
+        music.pause();
+        playIcon.innerHTML = '<path d="M8 5v14l11-7z"/>';
+        playing = false;
+      }
+    };
+
+    music.addEventListener('timeupdate',()=>{
+      const progressPercent = (music.currentTime / music.duration) * 100;
+      progress.style.width = `${progressPercent}%`;
+    });
+  </script>
+</body>
+</html>
